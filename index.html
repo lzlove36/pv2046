@@ -250,6 +250,8 @@ h1.title{
 
 /* ---------- 结局 ---------- */
 #screen-end{justify-content:flex-start;overflow-y:auto;padding-top:clamp(24px,6vh,60px);padding-bottom:40px}
+#screen-end::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;background:linear-gradient(100deg,rgba(4,6,10,.72) 0%,rgba(4,6,10,.44) 40%,rgba(4,6,10,.10) 70%,rgba(4,6,10,0) 100%)}
+#screen-end .end-wrap{position:relative;z-index:1}
 .end-wrap{width:min(940px,100%);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(16px,3vw,30px);align-items:start}
 .end-left{text-align:left}
 .end-left .kicker{font-size:11px;letter-spacing:.36em;color:var(--neon);margin-bottom:12px}
