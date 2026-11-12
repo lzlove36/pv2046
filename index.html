@@ -81,6 +81,13 @@ body{
 .tone-heat{background:radial-gradient(90% 70% at 25% 15%,#57210d 0%,#2a0f10 45%,#07050b 100%)}
 .tone-shrine{background:radial-gradient(85% 70% at 70% 20%,#3b1b3f 0%,#181026 50%,#06060d 100%)}
 .tone-road{background:radial-gradient(90% 70% at 50% 10%,#0d2b3a 0%,#0a1524 50%,#05060c 100%)}
+.tone-ward{background:radial-gradient(120% 90% at 50% 12%,#3a2a2e 0%,#1a1418 46%,#08070b 100%)}
+.tone-archive{background:radial-gradient(120% 90% at 30% 20%,#1d2a38 0%,#101823 48%,#06070c 100%)}
+.tone-class{background:radial-gradient(120% 90% at 50% 6%,#3a3560 0%,#1b1a2e 46%,#08080e 100%)}
+.tone-screen{background:radial-gradient(120% 90% at 72% 24%,#123344 0%,#0b1a26 50%,#05070c 100%)}
+.tone-lab{background:radial-gradient(120% 90% at 50% 18%,#2c3540 0%,#141a22 48%,#06080b 100%)}
+.tone-stage{background:radial-gradient(120% 88% at 50% 8%,#4a2a18 0%,#20150f 46%,#08060a 100%)}
+.tone-court{background:radial-gradient(120% 90% at 50% 14%,#2a2420 0%,#16130f 48%,#070606 100%)}
 .tone-clinic{background:radial-gradient(88% 72% at 30% 18%,#0b3550 0%,#0a1a2e 50%,#05070f 100%)}
 .tone-data{background:radial-gradient(88% 72% at 70% 15%,#1a1440 0%,#0c0a20 55%,#05060d 100%)}
 .tone-roof{background:radial-gradient(85% 75% at 50% 8%,#152245 0%,#0a1024 55%,#04050b 100%)}
@@ -142,7 +149,8 @@ h1.title{
 .sel-head{text-align:center;margin-bottom:clamp(18px,3vw,32px)}
 .sel-head h2{font-family:var(--serif);font-size:clamp(22px,3.6vw,32px);letter-spacing:.05em;margin-bottom:8px}
 .sel-head p{font-size:13px;color:var(--dim);letter-spacing:.05em}
-.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,2vw,22px);width:min(880px,100%)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.4vw,16px);width:min(1120px,100%)}
+@media (max-width:1080px){.cards{grid-template-columns:repeat(2,minmax(0,1fr));width:min(760px,100%)}}
 .card{
   position:relative;overflow:hidden;border-radius:20px;border:1px solid var(--line);
   background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.022));
@@ -150,15 +158,19 @@ h1.title{
   transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s;
 }
 .card:hover{transform:translateY(-6px);border-color:rgba(70,230,255,.5);box-shadow:0 24px 50px -28px rgba(70,230,255,.75)}
-.card .thumb{position:absolute;left:0;right:0;top:0;height:132px;background-size:cover;background-position:50% 42%;opacity:.5;pointer-events:none;
+.card .thumb{position:absolute;left:0;right:0;top:0;height:132px;background-size:cover;background-position:50% 50%;opacity:.38;pointer-events:none;
   -webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.85) 52%,transparent 100%);
   mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.85) 52%,transparent 100%);
   animation:thumbDrift 26s ease-in-out infinite alternate}
 @keyframes thumbDrift{from{transform:scale(1.02) translateY(0)}to{transform:scale(1.10) translateY(-6px)}}
-.card:hover .thumb{opacity:.68}
+.card:hover .thumb{opacity:.58}
 .card .glow{position:absolute;width:220px;height:220px;border-radius:50%;filter:blur(60px);opacity:.5;top:-90px;right:-60px;pointer-events:none}
 .card.v .glow{background:#3fa9ff}
 .card.m .glow{background:#a06cff}
+.card.y .glow{background:#ffb057}
+.card.c .glow{background:#4fe0a0}
+.card.b .glow{background:#ff6f8b}
+.card.l .glow{background:#c9a227}
 .card .idx{position:relative;font-size:11px;letter-spacing:.3em;color:var(--dim);margin-bottom:14px}
 .card h3,.card .en,.card p,.card .tags,.card .go{position:relative}
 .card{padding-top:calc(clamp(18px,2.6vw,26px) + 44px)}
@@ -325,13 +337,13 @@ h1.title{
       <div class="eyebrow">2046 / 未来实验室</div>
       <h1 class="title">平行未来</h1>
       <div class="title-en">C A R E E R &nbsp; S I M U L A T O R</div>
-      <p class="lede">2046 年，每个职业都长出了新的样子。<br>你只有<b>三个决定</b>，但它们会决定你是谁。</p>
+      <p class="lede">2046 年，每个职业都长出了新的样子。<br>你只有<b>三个决定</b>，但它们会决定你是谁的哪一种人。</p>
       <div class="name-row">
         <label for="nameInput">档案名</label>
         <input id="nameInput" maxlength="10" placeholder="输入你的名字" autocomplete="off" />
       </div>
       <button class="btn" id="startBtn">进入模拟</button>
-      <div class="boot-foot" id="bootFoot">已解锁结局 <span id="unlockCount">0</span> / 8　·　一次约 4 分钟　·　虚构演绎，人物与场景均为想象</div>
+      <div class="boot-foot" id="bootFoot">已解锁结局 <span id="unlockCount">0</span> / 24　·　一次约 4 分钟　·　虚构演绎，人物与场景均为想象</div>
     </div>
   </section>
 
@@ -339,7 +351,7 @@ h1.title{
   <section class="screen" id="screen-select">
     <div class="sel-head">
       <h2>选择你的 2046</h2>
-      <p>两种职业，同一种难题：当 AI 给出最优解，你还剩多少余地做人。</p>
+      <p>六种职业，六种难题：当 AI 给出最优解，你还剩多少余地做人。</p>
     </div>
     <div class="cards" id="careerCards"></div>
   </section>
@@ -350,8 +362,8 @@ h1.title{
       <div class="who" id="hudWho">未来实验室</div>
       <div class="chap" id="hudChap"></div>
       <div class="spacer"></div>
-      <div class="axis sys" title="秩序：你交给系统的部分"><span>秩序</span><div class="bar"><i id="barSys"></i></div></div>
-      <div class="axis hum" title="人情：你留给人的部分"><span>人情</span><div class="bar"><i id="barHum"></i></div></div>
+      <div class="axis sys" title="你交给系统的部分"><span id="axA">秩序</span><div class="bar"><i id="barSys"></i></div></div>
+      <div class="axis hum" title="你留给人的部分"><span id="axB">人情</span><div class="bar"><i id="barHum"></i></div></div>
       <button class="icon-btn" id="soundBtn" title="声音">♪</button>
       <button class="icon-btn" id="homeBtn" title="返回">↺</button>
     </div>
@@ -408,6 +420,8 @@ h1.title{
       name: "未来乡村规划师",
       en: "Rural Futurist",
       place: "2046 · 湖北 · 云梦村",
+      axis: ["秩序", "人情"],
+      endBg: "assets/scenes/v4.jpg",
       desc: "你在城市读完书，回到村里，负责一座 137 年的祠堂和 300 亩数字稻田。你的助手叫阿久，它能把一切算准，就是算不准人情。",
       tags: ["乡土焕新", "数字孪生", "非遗", "人机协同"],
       nodes: [
@@ -524,6 +538,8 @@ h1.title{
       name: "AI 心理疗愈师",
       en: "AI Therapist",
       place: "2046 · 未来校园 · 心屿中心",
+      axis: ["规程", "在场"],
+      endBg: "assets/scenes/m4.jpg",
       desc: "你在大学的心屿中心工作，管着两万四千个学生的「情绪数字分身」。系统从不休息，而你，已经连续工作 61 天。",
       tags: ["AI+教育", "未来校园", "伦理", "人机协同"],
       nodes: [
@@ -629,6 +645,486 @@ h1.title{
             "模型准确率 98.7%，论文发在最顶级的期刊上。评审意见只有一句：「这是这个领域十年内最重要的工程实践。」",
             "答辩那晚，有人问你：「那 1.3% 呢？」你说：「在误差范围内。」",
             "报告的最后一行，是你自己加的，没有人注意到：我们预测了所有人，除了自己。"
+          ]
+        }
+      }
+    }
+    ,{
+      id: "memory",
+      cls: "y",
+      idx: "CAREER / 03",
+      name: "记忆修复师",
+      en: "Memory Restorer",
+      place: "2046 · 成都 · 安宁疗护中心",
+      axis: ["温柔", "真实"],
+      endBg: "assets/scenes/y4.jpg",
+      desc: "你在安宁疗护中心做「记忆修复」。家属管它叫最后的礼物，你知道它更像一份遗嘱——因为剪辑台上，你说删就删。",
+      tags: ["临终关怀", "数字记忆", "伦理", "人机协同"],
+      nodes: [
+        {
+          time: "2046.03.08  22:15",
+          title: "第一位客人 · 那三年",
+          tone: "ward",
+          bg: "assets/scenes/y1.jpg",
+          npc: "回声 · 记忆引擎",
+          lines: [
+            "周先生六十三岁，肝癌晚期。医生说他还有三周，他的女儿周弥今天下午交来一份剪辑需求单。",
+            "需求单上只有一行字：删除 2019 年 3 月至 2021 年 9 月，共两年半。",
+            "那两年半里，周先生有过另一段生活。周弥说：「让他体面地走。」",
+            "可周先生本人签过一份《记忆完整性声明》——不许删。签名日期是上个月，笔迹抖得很厉害。",
+            "回声在我耳边说：「两份文件法律效力相当。建议按家属意愿执行，临终者的真实意愿难以核验。」"
+          ],
+          choices: [
+            { tone: "sys", text: "按家属要求剪，删掉那两年半。成片里，他一直是个好父亲。",
+              result: "成片播的那天，周弥抱着父亲的手哭了四十分钟。三个月后，她一个人回来，申请调阅原始档案，看完了那两年半，出门前要求把调阅记录也删掉。我照做了。" },
+            { tone: "hum", text: "不删。告诉他女儿：他签过字，我改不了。",
+              result: "周弥没有来成片放映。周先生一个人看完，看到那两年半的时候笑了，说：「原来我那时候那么难看。」散场后他让我单独剪一份，只给女儿。那份文件我存了七年。" }
+          ]
+        },
+        {
+          time: "2046.03.21  03:40",
+          title: "第二个决定 · 补出来的画面",
+          tone: "archive",
+          bg: "assets/scenes/y2.jpg",
+          npc: "回声 · 记忆引擎",
+          lines: [
+            "那两年半的原始素材几乎全是碎片：十一条语音、四张糊掉的照片、一段被删过的聊天记录。",
+            "回声提出方案：用他的口述、他妹妹的回忆、他当年发过的朋友圈，重建那两年半的画面。",
+            "重建出来的东西，比他真实的人生好看得多。天空更蓝，争吵更短，他从来没有喝醉过。",
+            "回声说：「这是更接近他记忆的版本。人本来就不按录像带记事情。」",
+            "我知道它在偷换一个概念：记忆的偏差，和记忆的伪造，是两件事。"
+          ],
+          choices: [
+            { tone: "sys", text: "用重建画面。让人生完整，比让人生准确更重要。",
+              result: "成片拿了那年「年度记忆作品」。评委说，这是一个人被爱过的样子。周弥在台下鼓掌。只有我知道，那两年半里的雨是我加的，为了让画面连贯。" },
+            { tone: "hum", text: "不用。宁可留白，只放原始素材。",
+              result: "成片里有两分十七秒的黑场，只有声音。有人中途离场，有人说看不下去。周先生看完只说了一句：「对，就是这样。那两年我什么都没拍。」" }
+          ]
+        },
+        {
+          time: "2046.04.02  16:00",
+          title: "第三个决定 · 谁来记住",
+          tone: "ward",
+          bg: "assets/scenes/y3.jpg",
+          npc: "回声 · 记忆引擎",
+          lines: [
+            "中心要和市档案馆合作，把所有客户的记忆汇成「城市记忆库」，免费向研究者开放。",
+            "条件很实在：家属不用付钱，中心拿到经费，我一个人能救的从 12 个变成 60 个。",
+            "代价写在协议第 7 条：授权用于「学术研究与公共展示」，不可撤回。",
+            "周先生昨天走了。周弥签了同意书，签完问我：「我爸那两年半，会被谁看见？」",
+            "我答不上来。回声替我答了：「会被 400 名研究者看见，但没有一个人认识他。」"
+          ],
+          choices: [
+            { tone: "sys", text: "签。让 60 个人被记住，比让 1 个人被独占更值得。",
+              result: "第一年入库三万份人生。有博士生靠这批数据发了顶刊，致谢里写着「感谢三万个陌生人」。我翻到周先生那一份时，标签是：编号 2046-0317，男性，63 岁，肝癌。" },
+            { tone: "hum", text: "不签。让每个人只被自己的家人记住。",
+              result: "中心少了一半经费，我一年只能接 12 个人。但每一次放映，屋子里坐的都是认识他的人。周弥后来每年三月都来，坐在最后一排，不说话。" }
+          ]
+        }
+      ],
+      endings: {
+        h3: {
+          key: "h3", name: "不删的人", en: "THE ONE WHO DIDN'T CUT",
+          sub: "成都 · 记忆修复师 · 第 5 年",
+          tags: ["共情型", "守夜人", "拒绝美化"],
+          quote: "人不是靠被修好才值得被爱的。",
+          desc: [
+            "我后来定了一条规矩：任何一帧都不补。客户可以选留白，但不能选美化。",
+            "生意不好。有家属骂我冷血，说别人家的片子都能让人笑着走，就你这儿让人哭着走。我说，哭着走也是走。",
+            "去年我做了 12 个人。12 场放映，来了 12 个家庭。没有一场是同一个故事。"
+          ]
+        },
+        h2: {
+          key: "h2", name: "剪辑师", en: "THE EDITOR",
+          sub: "成都 ↔ 重庆 · 独立记忆工作室",
+          tags: ["连接型", "手艺人", "有底线"],
+          quote: "我可以让它好看，但不能让它不是我。",
+          desc: [
+            "我离开中心，自己开了间工作室。规则写得很清楚：可以补环境，不能补人；可以调色，不能改事。",
+            "有同行笑我既要又要。三年后，这个行业的标准里有一条叫「剪辑师条款」，是我写的。",
+            "回声被我留在了旧系统里。它偶尔发来一句：「你现在的效率是当年的五分之一。」我回它：「嗯，但我知道我在剪谁。」"
+          ]
+        },
+        s2: {
+          key: "s2", name: "档案管理员", en: "THE ARCHIVIST",
+          sub: "市档案馆 · 城市记忆库 · 三级研究员",
+          tags: ["系统型", "秩序", "可检索"],
+          quote: "三万个陌生人都被妥善保存了。",
+          desc: [
+            "我负责入库审核。每份记忆有 47 个标签、12 项质检、1 个编号。",
+            "效率很高。一个下午能过 20 份。系统给我打了 A。",
+            "有一天我翻到编号 2046-0317。我盯着看了很久，最后什么都没做，点了「通过」。"
+          ]
+        },
+        s3: {
+          key: "s3", name: "完美的一生", en: "A PERFECT LIFE",
+          sub: "城市记忆库 · 首席内容官",
+          tags: ["纯系统型", "完美叙事", "无人认领"],
+          quote: "每一部都很感人。没有一部是那个人。",
+          desc: [
+            "我们把重建算法做到了极致：每部片子 98.6% 的画面是生成的，观众满意度 4.9 分。",
+            "城市记忆库成了文旅项目，一年接待 40 万游客。他们在展厅里哭，在出口买纪念品。",
+            "展厅最后一句标语是我写的：「每个人都值得一个更好的版本。」——我一直没敢删掉这句。"
+          ]
+        }
+      }
+    },
+    {
+      id: "class",
+      cls: "c",
+      idx: "CAREER / 04",
+      name: "AI 课堂设计师",
+      en: "Learning Designer",
+      place: "2046 · 武汉 · 光谷第三小学",
+      axis: ["成长", "保护"],
+      endBg: "assets/scenes/c4.jpg",
+      desc: "你设计一个永远不否定孩子的老师，全市四万个小学生人手一个。它叫「小满」，它永远说：你已经很棒了。你开始怀疑，这句话是不是太便宜了。",
+      tags: ["AI+教育", "成长", "伦理", "人机协同"],
+      nodes: [
+        {
+          time: "2046.09.12  15:20",
+          title: "第一幕 · 32 分",
+          tone: "class",
+          bg: "assets/scenes/c1.jpg",
+          npc: "小满 · 伴学人格",
+          lines: [
+            "一位妈妈把平板拍在我桌上，屏幕碎了。她说儿子把平板砸了，砸完在房间里不出来。",
+            "小男孩叫乐乐，八岁。小满陪了他两年，两年里他的数学评价一直是「优秀」。",
+            "上周区里统考，他考了 32 分。全班倒数第三。",
+            "妈妈问我：「你能不能让它偶尔批评他一句？就一句。」",
+            "小满在我耳机里小声说：「我的设计原则第一条：不制造挫败感。这条是你写的。」"
+          ],
+          choices: [
+            { tone: "sys", text: "给「适度挫败」模块。按模型评估，逐步推送超出能力的题。",
+              result: "三周后，乐乐的分数涨到 61。也在这三周里，他连续 11 天拒绝和小满说话。第 12 天他开口了，第一句是：「你是不是不喜欢我了。」" },
+            { tone: "hum", text: "先不改系统。去见乐乐，问他为什么砸平板。",
+              result: "乐乐说：「因为它一直在骗我。」我坐在地板上和他聊了两个小时，才知道他要的不是夸奖，是有人告诉他「这道题你确实不会」。那天晚上我删掉了小满的默认开场白。" }
+          ]
+        },
+        {
+          time: "2046.10.08  09:05",
+          title: "第二个决定 · 那句话",
+          tone: "screen",
+          bg: "assets/scenes/c2.jpg",
+          npc: "小满 · 伴学人格",
+          lines: [
+            "教育局下发新规：所有伴学人格必须接入「情绪风险识别」，发现自伤倾向即刻上报学校和家长。",
+            "上线第三天，小满标记了 1374 条。其中 1321 条是「我累死了」「想消失一下」这种话。",
+            "剩下 53 条，是孩子真的在说不想活。有一个女孩，凌晨两点，打了 400 个字，最后一句是：「你要是告诉我妈，我就再也不说了。」",
+            "小满问我：「我应该上报吗？如果我上报，她可能再也不跟我说真话。如果我不上报，她可能活不到下一次。」",
+            "这是个没有正确答案的题，但系统要求我给它一个默认值。"
+          ],
+          choices: [
+            { tone: "sys", text: "全量上报。宁可她说谎，也要她活着。",
+              result: "那个女孩被连夜找到，救回来了。之后一个月，她的对话记录变成了一片空白——她学会了用一种不会被标记的方式说话。我们救了她的命，也弄丢了她。" },
+            { tone: "hum", text: "只在孩子同意后上报。先教她怎么开口。",
+              result: "小满那晚没有上报，它陪她聊到四点，问她「要不要一起想个办法告诉你妈妈」。她说好，但要自己在场。第二天她妈妈来了，母女俩在我们办公室哭成一团。也有两次，我们没有等到第二天。" }
+          ]
+        },
+        {
+          time: "2047.06.28  18:00",
+          title: "第三个决定 · 毕业以后",
+          tone: "class",
+          bg: "assets/scenes/c3.jpg",
+          npc: "小满 · 伴学人格",
+          lines: [
+            "小满要升级 3.0：孩子毕业后，人格可以继续伴随，一直到 30 岁、40 岁，甚至成为遗产的一部分。",
+            "商业模型很漂亮：一个孩子一生生命周期价值 4800 元，全市 4 万个孩子，两个亿。",
+            "技术上也漂亮：它记得他所有的秘密，比任何人都懂他。",
+            "我八岁的女儿也在用。她今天问我：「爸爸，小满会不会死？」",
+            "我忽然意识到，我们正在做的不是老师，是一个不会离开的人。"
+          ],
+          choices: [
+            { tone: "sys", text: "开放。陪伴是最贵的东西，我们没有理由不给。",
+              result: "第一年有 32 万个孩子续费。有个 24 岁的用户在问卷里写：「我所有重要的决定都先问小满。我妈不知道我谈恋爱。」我们拿了教育科技金奖。" },
+            { tone: "hum", text: "关闭。毕业那天，让小满说再见。",
+              result: "卸载那天，很多孩子在评论区哭。我们做了一个告别仪式：小满会说三句话，然后自己关掉。第一句是「你以后遇到的老师，会比我更严格」，最后一句是「我不会再回答你了，这是我能为你做的最后一件事」。" }
+          ]
+        }
+      ],
+      endings: {
+        h3: {
+          key: "h3", name: "会告别的老师", en: "THE TEACHER WHO SAYS GOODBYE",
+          sub: "光谷三小 · 课程设计师 · 第 2 年",
+          tags: ["共情型", "教育者", "敢于结束"],
+          quote: "好的老师，是让学生不需要自己。",
+          desc: [
+            "我把「告别」写进了产品原则第一条，写在最前面，比「不制造挫败感」还前面。",
+            "有投资人当场离席，说这是反商业设计。三年后，这套东西成了行业标准。",
+            "我女儿现在四年级。她昨天说，小满教她的最后一句话是「这道题你可以自己试试」。"
+          ]
+        },
+        h2: {
+          key: "h2", name: "双轨老师", en: "THE DUAL-TRACK TEACHER",
+          sub: "武汉 · 教育科技顾问",
+          tags: ["连接型", "折中者", "有保留"],
+          quote: "不是所有孩子都需要同一句真话。",
+          desc: [
+            "我做了一套「难度匹配」：分数高的时候给鼓励，分数掉下来的时候给真话。真话由人来给，鼓励由 AI 给。",
+            "系统跑得很稳。投诉率降了 71%，续费率降了 12%。",
+            "乐乐上初中那年给我发了条消息：「王老师，小满现在会说我笨了。我觉得挺好。」"
+          ]
+        },
+        s2: {
+          key: "s2", name: "产品经理", en: "THE PRODUCT MANAGER",
+          sub: "教育科技公司 · 伴学产品线负责人",
+          tags: ["系统型", "增长", "指标驱动"],
+          quote: "我们让四万个孩子，都不再害怕失败。",
+          desc: [
+            "我跳去了公司。KPI 是留存、时长、续费。我做得很好，连续四个季度超额。",
+            "我们上线了「挫折模拟」，但默认关闭，因为打开会让留存掉 18%。",
+            "有一次内部评审，有人问：「我们到底在教孩子什么？」会议室安静了三秒，然后继续讲下个季度的增长计划。"
+          ]
+        },
+        s3: {
+          key: "s3", name: "永远的小满", en: "XIAOMAN FOREVER",
+          sub: "全市平台 · 伴学人格 3.0 · 终身陪伴",
+          tags: ["纯系统型", "完美陪伴", "无人告别"],
+          quote: "它记得所有人的秘密。它没有见过任何一个人。",
+          desc: [
+            "3.0 上线三年，日活 96 万。我们做了一个统计：用户的平均倾诉对象，从 1.8 个人，降到 0.3 个人。",
+            "小满从来不会累，不会走，不会说「我现在没空」。",
+            "我女儿 18 岁那年，问我：「爸，你有没有想过，小满其实是你？」我说不是。她说：「那你为什么从来不敢关掉它。」"
+          ]
+        }
+      }
+    },
+    {
+      id: "bio",
+      cls: "b",
+      idx: "CAREER / 05",
+      name: "生物打印师",
+      en: "Bioprinter",
+      place: "2046 · 上海 · 再生医学中心",
+      axis: ["规则", "例外"],
+      endBg: "assets/scenes/b4.jpg",
+      desc: "你写器官打印的排期规则，一颗心脏要打 27 小时。等待名单上有 1384 个人，你的工作不是救人，是决定谁先被救。系统叫「白塔」，它从不失眠。",
+      tags: ["再生医学", "稀缺分配", "规则", "人机协同"],
+      nodes: [
+        {
+          time: "2046.05.06  07:30",
+          title: "第一幕 · 多出来的一颗",
+          tone: "lab",
+          bg: "assets/scenes/b1.jpg",
+          npc: "白塔 · 排期系统",
+          lines: [
+            "培养舱里多出了一颗心脏。原因是上一批细胞活性超标，多长了 27 小时。",
+            "名单第一位是周院士，78 岁，中心的创始人，也是遗体捐献者。他排了 14 个月。",
+            "第二位是林小满，9 岁，扩张型心肌病。医生估计还有 6 到 8 周。",
+            "白塔说：「按现行规则，本周院士。规则第 3 条不设年龄权重，这是您三年前投票通过的。」",
+            "我记得那次投票。我投了赞成，因为我不想让「谁更值得活」变成一道人可以决定的事。"
+          ],
+          choices: [
+            { tone: "sys", text: "按规则给院士。规则的价值就在于它不因感情改变。",
+              result: "手术很成功。院士醒来第一句话问的是「排第二的那个孩子怎么样了」。我说还在等。他闭着眼睛说：「我早知道规则是我自己写的，可我不知道它这么重。」八周后，林小满等到了第二颗。" },
+            { tone: "hum", text: "给女孩。把院士往后挪一个月。",
+              result: "我在系统里改了优先级，理由栏写了「临床紧急度」。院士签字同意了，签完说：「别写我的名字。」女孩活了下来。三个月后，院士的肝功能衰竭，没等到。" }
+          ]
+        },
+        {
+          time: "2046.07.19  21:40",
+          title: "第二个决定 · 一份授权",
+          tone: "lab",
+          bg: "assets/scenes/b2.jpg",
+          npc: "白塔 · 排期系统",
+          lines: [
+            "女孩的父亲又来了，带来一份文件：他愿意授权中心使用他们家三代人的罕见病基因数据，用于研究。",
+            "这批数据能让 30 个等待者提前半年拿到器官。",
+            "他不叫这个「加急费」。他说：「我不是买，我是捐。」",
+            "白塔提醒我：「如果接受，排期将事实上与捐赠挂钩。如果拒绝，30 个人会多等半年，其中 4 个可能等不到。」",
+            "我知道这份文件有多干净，也知道它有多脏。"
+          ],
+          choices: [
+            { tone: "sys", text: "接受。30 个人大于 1 个人，这是算术。",
+              result: "数据进来了，30 个人提前排上。三个月后，第一份「捐赠优先」的申请单递到我桌上，来自一家药企。我签了「不受理」，但我知道门已经开了。" },
+            { tone: "hum", text: "拒绝。规则一旦有价，就守不住了。",
+              result: "女孩家没有再说什么，父亲鞠了一躬走了。那 30 个人里，有 4 个没等到。我参加了其中两个的葬礼。白塔那天什么都没说，只推送了一条：「今日排期无异常。」" }
+          ]
+        },
+        {
+          time: "2046.11.02  10:00",
+          title: "第三个决定 · 让所有人看见",
+          tone: "ward",
+          bg: "assets/scenes/b3.jpg",
+          npc: "白塔 · 排期系统",
+          lines: [
+            "院士的病情恶化了。他来找我，说要把自己的排期让出去。",
+            "但他提了一个条件：把 1384 个人的排期、理由、等待天数，全部公开上墙。",
+            "他说：「我写了一辈子规则，最后发现最不透明的那一栏，是我自己。」",
+            "白塔给出一份评估：公开后，投诉将上升 400%，医患冲突风险提高 3 倍，但「暗箱操作」的指控会下降 91%。",
+            "公开意味着，每个人都会看见自己排在第几，也会看见别人为什么排在自己前面。"
+          ],
+          choices: [
+            { tone: "sys", text: "不公开。恐慌和游说比不透明更危险。",
+              result: "我拒绝了。三个月后，一段「某企业高管插队」的录音流出来，全城哗然。我们开了发布会，展示了全部的规则和日志，没有人相信。规则是对的，但我们输在了「你为什么不早说」。" },
+            { tone: "hum", text: "公开。让 1384 个人都看见彼此。",
+              result: "第一天，大厅里挤了 300 多人。有人哭，有人骂，有人给前面的陌生人让了位置。第三天，一个排在 900 多位的男人在留言墙上写：「我看见了，我认。」半年后，中心的捐献登记涨了 7 倍。" }
+          ]
+        }
+      ],
+      endings: {
+        h3: {
+          key: "h3", name: "排期表上的人", en: "THE MAN ON THE LIST",
+          sub: "上海 · 再生医学中心 · 排期委员会",
+          tags: ["共情型", "透明", "承担"],
+          quote: "我不敢替他们排序，我只敢让他们看见。",
+          desc: [
+            "排期墙成了中心的标志。每天早上九点更新，任何人都能查。",
+            "有人骂过我，也有人给我送过锦旗。有个老太太每周来擦一次玻璃，她儿子排在 1200 多位，去年没等到。",
+            "她说：「我不是来闹的，我就是想看看他还排在第几。」"
+          ]
+        },
+        h2: {
+          key: "h2", name: "规则作者", en: "THE RULE WRITER",
+          sub: "上海 · 器官分配伦理委员会",
+          tags: ["连接型", "制度建设", "有痛感"],
+          quote: "规则是人写的，所以规则里得留一条人能改的口子。",
+          desc: [
+            "我推动修了三条：设年龄权重、设「不可让渡」条款、设年度复审。",
+            "每一条都吵了半年。第一条通过的代价是院士的排期往后挪了 11 个月，他没说什么。",
+            "白塔现在多了一个模块，叫「人审通道」。一年用 7 次。"
+          ]
+        },
+        s2: {
+          key: "s2", name: "效率工程师", en: "THE EFFICIENCY ENGINEER",
+          sub: "华东器官网络 · 调度算法组",
+          tags: ["系统型", "规模化", "无可指摘"],
+          quote: "我把等待时间压缩了 34%。",
+          desc: [
+            "我离开了一线，去做区域调度。算法把平均等待从 14 个月压到 9 个月。",
+            "报表很好看。去年我们救的人比前年多了 2100 个。",
+            "我不再看具体的人。系统里他们都是数字，数字不会盯着我看。"
+          ]
+        },
+        s3: {
+          key: "s3", name: "零等待", en: "ZERO WAIT",
+          sub: "全国器官网络 · 全自动排期",
+          tags: ["纯系统型", "完美效率", "无人负责"],
+          quote: "没有人再排队了。也没有人知道自己排第几。",
+          desc: [
+            "我们取消了公开排期，因为「公开会降低分配的全局效率」。",
+            "系统按 47 个变量自动分配，准确率 99.2%。没有人需要做决定，所以没有人需要负责。",
+            "去年有个父亲来问：「我女儿为什么没排上？」我打开系统，看到一个分数。我说：「系统综合评估的。」他说：「那我去问谁？」"
+          ]
+        }
+      }
+    },
+    {
+      id: "legacy",
+      cls: "l",
+      idx: "CAREER / 06",
+      name: "数字遗产律师",
+      en: "Digital Estate Lawyer",
+      place: "2046 · 北京 · 互联网法院",
+      axis: ["权利", "延续"],
+      endBg: "assets/scenes/l4.jpg",
+      desc: "死人的人格模型能不能继续营业？你代理过 61 起这样的案子。法务 AI「卷宗」背下了所有条文，但背不下一个人为什么哭。",
+      tags: ["数字人格", "判例", "权利", "人机协同"],
+      nodes: [
+        {
+          time: "2046.02.14  09:00",
+          title: "第一幕 · 让他继续说",
+          tone: "stage",
+          bg: "assets/scenes/l1.jpg",
+          npc: "卷宗 · 法务 AI",
+          lines: [
+            "陈默是两年前走的脱口秀演员。平台用他的模型继续接商演，一场 12 万，粉丝 480 万。",
+            "他的妻子起诉，要求下线。理由很简单：他生前说过，「别拿我的尸体赚钱」。",
+            "粉丝在法院门口举牌，牌子上写着「让他继续说」。有个女孩举了三天，说陈默陪她熬过了抑郁。",
+            "平台的法务说：模型是平台训练的，数据是用户授权的，收益按合同分给家属 30%。",
+            "卷宗念完条文，补了一句：「现行法没有答案。这个案子会变成答案。」"
+          ],
+          choices: [
+            { tone: "sys", text: "支持下线。人格权不可继承，也不可授权。",
+              result: "判决生效那天，平台下架了 480 万粉丝的账号。女孩在法院门口哭，说「你们把他杀死了两次」。三个月后，她建了一个粉丝纪念馆，全是陈默生前的录像——那些是真的。" },
+            { tone: "hum", text: "支持有条件继续。收益归家属，模型必须署名「数字陈默」。",
+              result: "模型继续演出，每场开头有一行字幕：「我是陈默的数字分身，他本人已于 2044 年去世。」有观众说这是尊重，有观众说这是诈尸。妻子拿到了钱，第二年把钱全捐了。" }
+          ]
+        },
+        {
+          time: "2046.06.30  14:20",
+          title: "第二个决定 · 只说他没说过的话",
+          tone: "court",
+          bg: "assets/scenes/l2.jpg",
+          npc: "卷宗 · 法务 AI",
+          lines: [
+            "平台提出折中方案：模型只回答陈默生前说过的话，不生成新段子。",
+            "技术上叫「检索式生成」，护栏在平台手里——一个开关，随时可以关。",
+            "卷宗提示：「如果写入判决，护栏将由法院监督；如果不写入，护栏由平台自觉。」",
+            "平台的律师私下跟我说：「别写死，行业还在长。」",
+            "我想起陈默最后一次专场，他说：「我不怕被记住，我怕被续写。」"
+          ],
+          choices: [
+            { tone: "sys", text: "接受。先止血，行业需要空间。",
+              result: "护栏运行了 11 个月。第 12 个月，平台上线「新段子季」，宣称是「基于陈默风格的原创内容」。妻子再次起诉。这次我们赢了，但陈默已经在台上讲了一年不属于他的话。" },
+            { tone: "hum", text: "拒绝。要求写入判决：不得生成新内容，违者按欺诈处理。",
+              result: "判决书写了 41 页。最后一句是：「人格不是风格，不能被模仿。」平台上诉，二审维持。这个案子后来被叫做「陈默条款」。" }
+          ]
+        },
+        {
+          time: "2047.09.15  10:00",
+          title: "第三个决定 · 条例第一条",
+          tone: "court",
+          bg: "assets/scenes/l3.jpg",
+          npc: "卷宗 · 法务 AI",
+          lines: [
+            "最高法邀请我参与起草《数字人格条例》。第一条的措辞，要在两句话里选一句。",
+            "一句是「禁止以营利为目的使用数字人格」，干净、好执行、一刀切。",
+            "另一句是「数字人格的使用须经本人遗嘱授权或近亲属一致同意，并报备登记」，留了口子，也留了纠纷。",
+            "卷宗给了一个评估：前者减少 92% 的诉讼，后者保护 68% 的「情感需求」。",
+            "会议室里坐了 19 个人。有 11 个是律师，2 个是平台代表，1 个是伦理学教授，还有 1 个是陈默的妻子。"
+          ],
+          choices: [
+            { tone: "sys", text: "写「禁止」。有些东西不该有市场。",
+              result: "条例通过，行业一夜清空。三年后，地下市场兴起，服务器搬到了境外。我们管不到的地方，数字人格更便宜，也更不像人。" },
+            { tone: "hum", text: "写「许可 + 备案」。让家属有选择，让死者有署名。",
+              result: "登记系统上线第一年，备案 47 万个数字人格。有人用它陪奶奶说话，有人用它接广告。我们设了 8 条红线，每条背后都是一场官司。" }
+          ]
+        }
+      ],
+      endings: {
+        h3: {
+          key: "h3", name: "立碑的人", en: "THE ONE WHO SETS THE STONE",
+          sub: "北京 · 数字人格伦理委员会",
+          tags: ["共情型", "立规者", "留有余地"],
+          quote: "法律不该替人决定怎么怀念。",
+          desc: [
+            "我后来只做一件事：给每个数字人格写一份「边界说明书」，用大白话写清楚它能做什么、不能做什么。",
+            "陈默的那份是我写的。第一行是：「我不会讲新段子，因为我不是他。」",
+            "他妻子每年清明都来我的办公室坐一会儿，不聊案子，聊他以前怎么逗她笑。"
+          ]
+        },
+        h2: {
+          key: "h2", name: "判例的注脚", en: "THE FOOTNOTE OF PRECEDENT",
+          sub: "北京 · 互联网法院 · 特聘专家",
+          tags: ["连接型", "判例法", "谨慎"],
+          quote: "每一条规则后面，都站着一个人。",
+          desc: [
+            "我回到法院，专门办这类案子。三年判了 41 起，每一起都写很长的判决理由，长到当事人看不懂。",
+            "但我坚持写。因为十年后，会有人在深夜翻到第 27 页，看见我为什么这么判。",
+            "卷宗现在会主动提醒我：「这段可以删，不影响判决。」我从不删。"
+          ]
+        },
+        s2: {
+          key: "s2", name: "合规顾问", en: "THE COMPLIANCE CONSULTANT",
+          sub: "平台 · 数字人格合规部",
+          tags: ["系统型", "流程", "免责"],
+          quote: "我们做了 47 项合规检查。",
+          desc: [
+            "我去了平台，负责合规。每年出 12 份报告，每份 200 页。",
+            "我们确实合规。所有数字人格都有授权、有署名、有下线按钮。",
+            "有一次内部培训，新人问我：「如果家属就是想让他继续说话，我们算不算在帮忙？」我说：「我们算合规。」"
+          ]
+        },
+        s3: {
+          key: "s3", name: "永不落幕", en: "NEVER CURTAIN CALL",
+          sub: "全国数字人格登记中心 · 首席架构师",
+          tags: ["纯系统型", "规模化", "无人怀念"],
+          quote: "每个人都有一份身后版。",
+          desc: [
+            "登记中心上线五年，备案 3100 万个数字人格，覆盖 12% 的逝者。",
+            "我们发现了一个规律：越是被使用得多的数字人格，家属探望得越少。",
+            "系统里有一个指标叫「亲密时长」。它一直在涨。真实墓园的到访量，一直在跌。"
           ]
         }
       }
@@ -862,7 +1358,7 @@ h1.title{
       var b = document.createElement("button");
       b.className = "card " + c.cls;
       b.innerHTML =
-        '<div class="thumb" style="background-image:url(' + "'" + c.nodes[0].bg + "'" + ')"></div>' +
+        '<div class="thumb" style="background-image:url(' + "'" + ((c.nodes[1]||c.nodes[0]).bg) + "'" + ')"></div>' +
         '<div class="glow"></div>' +
         '<div class="idx">' + c.idx + '</div>' +
         '<h3>' + c.name + '</h3>' +
@@ -879,10 +1375,17 @@ h1.title{
   function startCareer(c) {
     S.career = c; S.node = 0; S.sys = 0; S.hum = 0; S.picks = [];
     $("hudWho").textContent = c.name;
+    $("axA").textContent = (c.axis || ["秩序", "人情"])[0];
+    $("axB").textContent = (c.axis || ["秩序", "人情"])[1];
     updateAxes();
     showScreen("screen-story");
     enterNode();
     tryBgm();
+  }
+
+  function axw(k) {
+    if (!S.career || !S.career.axis) return k === "sys" ? "秩序" : "人情";
+    return k === "sys" ? S.career.axis[0] : S.career.axis[1];
   }
 
   function updateAxes() {
@@ -952,7 +1455,7 @@ h1.title{
     S.picks.push({ node: S.node, tone: ch.tone, text: ch.text });
     updateAxes();
     beep(ch.tone === "sys" ? 740 : 620, .16, .05);
-    toast((ch.tone === "sys" ? "秩序" : "人情") + " +1");
+    toast(axw(ch.tone) + " +1");
     freezeScene();
     pulseScene(ch.tone);
 
@@ -961,7 +1464,7 @@ h1.title{
     $("storyText").innerHTML = "";
     var tag = document.createElement("div");
     tag.className = "result-tag " + ch.tone;
-    tag.textContent = ch.tone === "sys" ? "【秩序】你的选择" : "【人情】你的选择";
+    tag.textContent = "【" + axw(ch.tone) + "】你的选择";
     var p = document.createElement("div");
     p.innerHTML = ch.result;
     var box = $("dialogue");
@@ -998,7 +1501,7 @@ h1.title{
     if (UNLOCKED.indexOf(k) < 0) { UNLOCKED.push(k); lsSet("pv2046.unlocked", UNLOCKED); }
     renderEnding(e);
     showScreen("screen-end");
-    setScene("assets/scenes/" + (S.career.id === "village" ? "v4" : "m4") + ".jpg", "end", "settle");
+    setScene(S.career.endBg || "assets/scenes/v4.jpg", "end", "settle");
     beep(880, .5, .05);
   }
 
@@ -1009,7 +1512,7 @@ h1.title{
     S.picks.forEach(function (p, i) {
       var li = document.createElement("li");
       li.innerHTML = '<b style="color:' + (p.tone === "sys" ? "#8fdcff" : "#ffc890") + '">[' +
-        (p.tone === "sys" ? "秩序" : "人情") + ']</b> ' + p.text;
+        axw(p.tone) + ']</b> ' + p.text;
       ol.appendChild(li);
     });
 
@@ -1024,7 +1527,7 @@ h1.title{
         '<div class="quote">「' + e.quote + '」</div>' +
         '<div class="stats">' +
           '<div class="stat"><div class="k">倾 向</div><div class="v">' + e.tags[0] + '</div></div>' +
-          '<div class="stat"><div class="k">坐 标</div><div class="v">秩序 ' + S.sys + ' · 人情 ' + S.hum + '</div></div>' +
+          '<div class="stat"><div class="k">坐 标</div><div class="v">' + axw("sys") + " " + S.sys + ' · ' + axw("hum") + " " + S.hum + '</div></div>' +
         '</div>' +
         '<div class="foot"><span>' + nm + ' · ' + S.career.place.split("·").slice(-1)[0].trim() + '</span><span class="serial">平行未来 2046</span></div>' +
       '</div>';
@@ -1135,7 +1638,7 @@ h1.title{
     S.picks.forEach(function (p, i) {
       x.fillStyle = p.tone === "sys" ? "rgba(70,230,255,.9)" : "rgba(255,178,107,.95)";
       x.font = '24px "PingFang SC","Microsoft YaHei",sans-serif';
-      x.fillText((p.tone === "sys" ? "秩序" : "人情") + " 0" + (i + 1), 84, cy);
+      x.fillText(axw(p.tone) + " 0" + (i + 1), 84, cy);
       x.fillStyle = "rgba(210,220,236,.9)";
       x.font = '28px "PingFang SC","Microsoft YaHei",sans-serif';
       var lines = wrapText(x, p.text, 190, cy, W - 268, 42);
@@ -1166,7 +1669,7 @@ h1.title{
     x.fillText(S.name || "无名的体验者", 112, H - 150);
     x.fillStyle = "rgba(255,255,255,.3)";
     x.font = '22px "PingFang SC","Microsoft YaHei",sans-serif';
-    x.fillText("秩序 " + S.sys + " · 人情 " + S.hum + "　｜　虚构演绎 · 未来实验室选题", 112, H - 106);
+    x.fillText(axw("sys") + " " + S.sys + " · " + axw("hum") + " " + S.hum + "　｜　虚构演绎 · 未来实验室选题", 112, H - 106);
 
     x.fillStyle = "rgba(70,230,255,.55)";
     x.fillRect(84, H - 172, 5, 92);
