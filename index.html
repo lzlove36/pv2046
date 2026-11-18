@@ -1231,6 +1231,10 @@ h1.title{
       box.appendChild(s);
     }
   }
+  function thumbOf(u) { return u.replace("assets/scenes/", "assets/ui/thumbs/"); }
+  function prefetchScenes(list) {
+    for (var i = 0; i < list.length; i++) { var im = new Image(); im.src = list[i]; }
+  }
   function setScene(url, tone, camKey, dim) {
     var layer = $("bgLayer");
     layer.className = "tone-" + (tone || "end") + " scan-on" + (dim ? " dim" : "");
@@ -1240,18 +1244,21 @@ h1.title{
     var next = shotCur === 0 ? shotB : shotA;
     var prev = shotCur === 0 ? shotA : shotB;
     var token = ++sceneToken;
+    var inner = next.querySelector("i");
+    /* 先把 15KB 缩略图顶上去：弱网下也不会留白 */
+    inner.style.backgroundImage = 'url("' + thumbOf(url) + '")';
+    inner.style.transform = "scale(" + p.s0 + ")";
+    next.classList.add("on");
+    prev.classList.remove("on");
+    shotCur = shotCur === 0 ? 1 : 0;
+    startCam(inner, { s0: p.s0, s1: p.s1, dx: p.dx, dy: p.dy, durMs: p.dur * 1000 });
+    /* 大图到货后原地替换 */
     var probe = new Image();
     probe.onload = function () {
       if (token !== sceneToken) return;
-      var inner = next.querySelector("i");
       inner.style.backgroundImage = 'url("' + url + '")';
-      inner.style.transform = "scale(" + p.s0 + ")";
-      next.classList.add("on");
-      prev.classList.remove("on");
-      shotCur = shotCur === 0 ? 1 : 0;
-      startCam(inner, { s0: p.s0, s1: p.s1, dx: p.dx, dy: p.dy, durMs: p.dur * 1000 });
     };
-    probe.onerror = function () { /* 无素材时只留渐变，不报错 */ };
+    probe.onerror = function () { /* 无素材时保留缩略图 */ };
     probe.src = url;
   }
 
@@ -1460,6 +1467,11 @@ h1.title{
     showScreen("screen-story");
     enterNode();
     tryBgm();
+    /* 预取这条线的其余三幕 + 结局图 */
+    var pre = [];
+    for (var i = 0; i < c.nodes.length; i++) pre.push(c.nodes[i].bg);
+    if (c.endBg) pre.push(c.endBg);
+    prefetchScenes(pre);
   }
 
   function axw(k) {
