@@ -1323,7 +1323,7 @@ h1.title{
       // opus/webm 体积只有 mp3 的三分之一，Safari 不支持时回退 mp3
       bgm.src = bgm.canPlayType && bgm.canPlayType('audio/webm;codecs=opus')
         ? "assets/audio/bgm.webm" : "assets/audio/bgm.mp3";
-      bgm.loop = false; bgm.preload = "auto"; bgm.volume = 0;
+      bgm.loop = false; bgm.preload = "metadata"; bgm.volume = 0;
       // MediaRecorder 产出的 webm 头里没有时长，浏览器不会自动 loop，手动接回开头
       bgm.addEventListener("ended", function () {
         try { bgm.currentTime = 0; if (S.sound) bgm.play().catch(function () {}); } catch (e) {}
@@ -1367,7 +1367,8 @@ h1.title{
       document.removeEventListener("pointerdown", unlock, true);
       document.removeEventListener("touchstart", unlock, true);
       document.removeEventListener("keydown", unlock, true);
-      tryBgm();
+      /* 晚 1.6s 再拉音乐：770KB 音频别跟首张场景图抢带宽 */
+      setTimeout(tryBgm, 1600);
     };
     document.addEventListener("pointerdown", unlock, true);
     document.addEventListener("touchstart", unlock, true);
