@@ -1448,6 +1448,13 @@ h1.title{
   function startSelectShow() {
     stopSelectShow();
     if (!CAREERS || !CAREERS.length) return;
+    /* 预取六条线的第一幕缩略图（各 ~15KB），进剧情时第一张图立刻就有 */
+    if (!startSelectShow._pre) {
+      startSelectShow._pre = 1;
+      var th = [];
+      for (var i = 0; i < CAREERS.length; i++) th.push(thumbOf(CAREERS[i].nodes[0].bg));
+      prefetchScenes(th);
+    }
     selIdx = 0;
     setScene(CAREERS[0].nodes[0].bg, CAREERS[0].nodes[0].tone || "end", "push", true);
     selTimer = setInterval(function () {
