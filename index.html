@@ -1308,22 +1308,70 @@ h1.title{
       o.start(); o.stop(AC.currentTime + (dur || .18) + .02);
     } catch (e) {}
   }
-  function tryBgm() {
-    if (bgmOn || !S.sound) return;
+  var bgmReady = false, bgmWanted = false;
+  function initBgm() {
+    if (bgm) return;
     try {
-      bgm = new Audio("assets/audio/bgm.mp3");
-      bgm.loop = true; bgm.volume = .28;
-      var p = bgm.play();
-      if (p && p.catch) p.catch(function () {});
+      bgm = new Audio();
+      // opus/webm 体积只有 mp3 的三分之一，Safari 不支持时回退 mp3
+      bgm.src = bgm.canPlayType && bgm.canPlayType('audio/webm;codecs=opus')
+        ? "assets/audio/bgm.webm" : "assets/audio/bgm.mp3";
+      bgm.loop = false; bgm.preload = "auto"; bgm.volume = 0;
+      // MediaRecorder 产出的 webm 头里没有时长，浏览器不会自动 loop，手动接回开头
+      bgm.addEventListener("ended", function () {
+        try { bgm.currentTime = 0; if (S.sound) bgm.play().catch(function () {}); } catch (e) {}
+      });
+      bgm.addEventListener("canplaythrough", function () { bgmReady = true; });
       bgm.onerror = function () { bgm = null; };
-      bgmOn = true;
+      bgm.load();
+      window.__bgm = bgm; // debug hook
+      // 先尝试带声音直接播（若该站点已被允许自动播放）；被拦截则静音续播，等首次手势再开声
+      try {
+        bgm.muted = false; bgm.volume = .28;
+        var pr = bgm.play();
+        if (pr && pr.catch) pr.catch(function () {
+          try { bgm.muted = true; bgm.volume = 0; bgm.play().catch(function () {}); } catch (e) {}
+        });
+      } catch (e) {}
     } catch (e) { bgm = null; }
   }
+  function fadeTo(v, ms) {
+    if (!bgm) return;
+    var from = bgm.volume, t0 = performance.now(), dur = ms || 1200;
+    (function step() {
+      var k = Math.min(1, (performance.now() - t0) / dur);
+      try { bgm.volume = from + (v - from) * k; } catch (e) {}
+      if (k < 1) requestAnimationFrame(step);
+    })();
+  }
+  function tryBgm() {
+    if (!S.sound) return;
+    bgmWanted = true;
+    initBgm();
+    if (!bgm) return;
+    bgm.muted = false;
+    var p = bgm.play();
+    if (p && p.catch) p.catch(function () {});
+    if (!bgmOn) { bgmOn = true; fadeTo(.28, 1600); }
+  }
+  // 第一次交互（点/触/键）就开音乐：浏览器要求先有一次用户手势
+  (function () {
+    var unlock = function () {
+      document.removeEventListener("pointerdown", unlock, true);
+      document.removeEventListener("touchstart", unlock, true);
+      document.removeEventListener("keydown", unlock, true);
+      tryBgm();
+    };
+    document.addEventListener("pointerdown", unlock, true);
+    document.addEventListener("touchstart", unlock, true);
+    document.addEventListener("keydown", unlock, true);
+    initBgm();
+  })();
   $("soundBtn").addEventListener("click", function (e) {
     e.stopPropagation();
     S.sound = !S.sound;
     this.textContent = S.sound ? "♪" : "✕";
-    if (bgm) { if (S.sound) { bgm.play().catch(function () {}); } else { bgm.pause(); } }
+    if (bgm) { if (S.sound) { bgm.muted = false; bgm.play().catch(function () {}); fadeTo(.28, 800); } else { fadeTo(0, 400); setTimeout(function(){ if (bgm && !S.sound) bgm.pause(); }, 420); } }
     if (S.sound) { tryBgm(); beep(660, .12, .04); }
     toast(S.sound ? "声音：开" : "声音：关");
   });
