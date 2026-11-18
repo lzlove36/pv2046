@@ -40,7 +40,7 @@ body{
   will-change:transform;
 }
 #bgLayer .shot.on{opacity:.70}
-#bgLayer.dim .shot.on{opacity:.26}
+#bgLayer.dim .shot.on{opacity:.4}
 #bgLayer.dim .shot i{background-position:50% 48%}
 #bgLayer.dim .embers{opacity:.45}
 /* 颗粒 / 光扫 / 呼吸暗角：让静帧"活"起来 */
@@ -166,7 +166,7 @@ h1.title{
 }
 .card{
   position:relative;overflow:hidden;border-radius:20px;border:1px solid var(--line);
-  background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.022));
+  background:linear-gradient(160deg,rgba(10,16,28,.66),rgba(8,12,22,.54));
   padding:clamp(18px,2.6vw,26px);cursor:pointer;text-align:left;font-family:inherit;color:inherit;
   transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s;
 }
@@ -1435,7 +1435,23 @@ h1.title{
   }
 
   /* ---------------- 8. 剧情流程 ---------------- */
+  /* 选职业页：六条线的首幕图轮流淡入，让整页有内容 */
+  var selTimer = null, selIdx = 0;
+  function stopSelectShow() { if (selTimer) { clearInterval(selTimer); selTimer = null; } }
+  function startSelectShow() {
+    stopSelectShow();
+    if (!CAREERS || !CAREERS.length) return;
+    selIdx = 0;
+    setScene(CAREERS[0].nodes[0].bg, CAREERS[0].nodes[0].tone || "end", "push", true);
+    selTimer = setInterval(function () {
+      selIdx = (selIdx + 1) % CAREERS.length;
+      var n = CAREERS[selIdx].nodes[0];
+      setScene(n.bg, n.tone || "end", camFor(selIdx % 6), true);
+    }, 5200);
+  }
+
   function startCareer(c) {
+    stopSelectShow();
     S.career = c; S.node = 0; S.sys = 0; S.hum = 0; S.picks = [];
     $("hudWho").textContent = c.name;
     $("axA").textContent = (c.axis || ["秩序", "人情"])[0];
@@ -1761,7 +1777,7 @@ h1.title{
     var v = $("nameInput").value.trim();
     S.name = v.slice(0, 10);
     showScreen("screen-select");
-    setScene("assets/scenes/v1.jpg", "heat", "tilt", true);
+    startSelectShow();
     tryBgm();
     beep(660, .18, .05);
   });
@@ -1778,12 +1794,12 @@ h1.title{
     e.stopPropagation();
     if (S.career && S.phase !== "result") { /* keep */ }
     showScreen("screen-select");
-    setScene("assets/scenes/v1.jpg", "heat", "tilt", true);
+    startSelectShow();
   });
 
   $("saveCard").addEventListener("click", exportCard);
   $("againBtn").addEventListener("click", function () { if (S.career) startCareer(S.career); });
-  $("otherBtn").addEventListener("click", function () { showScreen("screen-select"); setScene("assets/scenes/v1.jpg", "heat", "tilt", true); });
+  $("otherBtn").addEventListener("click", function () { stopSelectShow(); showScreen("screen-select"); startSelectShow(); });
 
   document.addEventListener("keydown", function (e) {
     if (e.key === "1" || e.key === "2") {
